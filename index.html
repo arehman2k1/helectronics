@@ -1,3 +1,9 @@
+<?php
+    include('./include/connect.php');
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +29,7 @@
         <!-- first child -->
         <nav class="navbar navbar-expand-lg navbar-light bg-info">
             <div class="container-fluid p-10">
-                <a><img class="logo" src="./images/logo.png"></a>
+                <img class="logo" src="./images/logo.png">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -82,42 +88,34 @@
                     <li class="nav-item bg-info">
                         <a href="#" class="navlink text-light"><h3>Delivery Brands</h3></a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Brand 1</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Brand 2</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Brand 3</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Brand 4</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Brand 5</h4></a>
-                    </li>
+                    <?php
+                        $select_brands="SELECT * FROM brands ";
+                        $result_brands=mysqli_query($conn,$select_brands);
+                        while($row_data=mysqli_fetch_assoc($result_brands)){
+                            $brand_title=$row_data['brand_title'];
+                            $brand_id=$row_data['brand_id'];
+                            echo "<li class='nav-item'><a href='index.php?brand=$brand_id' class='navlink text-light'>
+                                        <h4></h4>$brand_title</h4></a>
+                                  </li>";
+                        }
+                    ?>
                 </ul>
                 <!-- categories to be displayed -->
                 <ul class="navbar-nav me_auto text-center">
                     <li class="nav-item bg-info">
                         <a href="#" class="navlink text-light"><h3>Categories</h3></a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Category 1</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Category 2</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Category 3</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Category 4</h4></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="navlink text-light"><h4></h4>Category 5</h4></a>
-                    </li>
+                    <?php
+                        $select_categories="SELECT * FROM categories ";
+                        $result_categories=mysqli_query($conn,$select_categories);
+                        while($row_data=mysqli_fetch_assoc($result_categories)){
+                            $category_title=$row_data['category_title'];
+                            $category_id=$row_data['category_id'];
+                            echo "<li class='nav-item'><a href='index.php?category=$category_id' class='navlink text-light'>
+                                        <h4></h4>$category_title</h4></a>
+                                  </li>";
+                        }
+                    ?>
                 </ul>
             </div>
             <div class="col-md-10 mb-2">
